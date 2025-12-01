@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee - Finacle</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="welcome-section">
+                <h1>Update Employee</h1>
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <div class="error-message"><%= error %></div>
+                <% } %>
+                <% if (employee) { %>
+                    <form class="signup-form" action="/update" method="POST">
+                        <input type="hidden" name="eid" value="<%= employee.eid %>">
+                        <div class="form-group">
+                            <label for="ename">Employee Name</label>
+                            <input type="text" id="ename" name="ename" required placeholder="Enter employee name" value="<%= employee.ename %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="eemail">Employee Email</label>
+                            <input type="email" id="eemail" name="eemail" required placeholder="Enter employee email" value="<%= employee.eemail %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="epass">Password</label>
+                            <input type="password" id="epass" name="epass" required placeholder="Enter password" value="<%= employee.epass %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="erole">Employee Role</label>
+                            <select id="erole" name="erole" required>
+                                <option value="">Select a role</option>
+                                <option value="Admin" <%= employee.erole === 'Admin' ? 'selected' : '' %>>Admin</option>
+                                <option value="Manager" <%= employee.erole === 'Manager' ? 'selected' : '' %>>Manager</option>
+                                <option value="Employee" <%= employee.erole === 'Employee' ? 'selected' : '' %>>Employee</option>
+                                <option value="HR" <%= employee.erole === 'HR' ? 'selected' : '' %>>HR</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-btn">Update Employee</button>
+                        <a href="/view-employees" class="cancel-btn">Cancel</a>
+                    </form>
+                <% } else { %>
+                    <div class="error-message">Employee not found.</div>
+                    <a href="/view-employees" class="cancel-btn">Back to Employees</a>
+                <% } %>
+            </section>
+        </div>
+    </main>
+
+    <script src="/script.js"></script>
+</body>
+</html>
+

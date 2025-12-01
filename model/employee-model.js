@@ -50,3 +50,16 @@ exports.removeEmployee = (id) => {
         throw err;
     }
 }
+
+exports.getEmployeeByEmailAndPassword = async (email, password) => {
+    try {
+        const [rows] = await pool.execute(
+            'select * from ems where eemail=? and epass=?',
+            [email, password]
+        );
+        return rows.length > 0 ? rows[0] : null;
+    } catch (err) {
+        console.log("Error in getEmployeeByEmailAndPassword", err);
+        throw err;
+    }
+}
